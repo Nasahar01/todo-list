@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌸 My To-Do List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #ffd6e8, #ffc3a0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 500px;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff69b4;
+      text-align: center;
+    }
+    .input-group {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 2px solid #ffc0cb;
+      border-radius: 12px 0 0 12px;
+    }
+    button {
+      padding: 10px 16px;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1rem;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fff0f5;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .done {
+      text-decoration: line-through;
+      color: gray;
+      background: #e0ffe0;
+    }
+    .task-text {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌼 My To-Do List</h1>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Add a task..." />
+      <button onclick="addTask()">➕</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const input = document.getElementById("taskInput");
+    const list = document.getElementById("taskList");
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      span.className = "task-text";
+      span.textContent = "🧸 " + text;
+      span.onclick = () => {
+        li.classList.toggle("done");
+      };
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "🗑";
+      delBtn.onclick = () => li.remove();
+
+      li.appendChild(span);
+      li.appendChild(delBtn);
+      list.appendChild(li);
+
+      input.value = "";
+    }
+
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") addTask();
+    });
+  </script>
+</body>
+</html>
